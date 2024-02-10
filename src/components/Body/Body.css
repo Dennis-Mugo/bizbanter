@@ -1,0 +1,45 @@
+.body_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: calc(100vh - 63px);
+    overflow-y: scroll;
+}
+
+.body_header_text {
+    margin: 15px 10px;
+    font-family: Nunito;
+}
+
+.file_stage {
+    border: 2px dashed var(--pureWhite);
+    width: 85%;
+    min-height: 40vh;
+    border-radius: 10px;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.stage_footer {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.file_name {
+    /* margin: 10px 5px; */
+    margin-right: 5px;
+    font-family: NunitoSans;
+}
+
+
+
+.file_stage_header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 10px;
+}

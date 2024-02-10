@@ -1,0 +1,32 @@
+.side_menu_container {
+    border-top: 1px solid var(--grey600);
+    padding: 15px 10px 0;
+    height: calc(100vh - 62px);
+    overflow-y: scroll;
+}
+
+.sidemenu_item {
+    display: flex;
+    align-items: center;
+    display: flex;
+    height: 46px;
+    /* border: 1px solid red; */
+    cursor: pointer;
+    border-radius: 23px;
+   margin-bottom: 10px;
+    transition: all 150ms ease-in-out;
+}
+
+
+.sidemenu_item_title {
+    font-family: Nunito;
+}
+
+.drawer_header {
+    height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    border-bottom: 1px solid var(--grey300);
+}
