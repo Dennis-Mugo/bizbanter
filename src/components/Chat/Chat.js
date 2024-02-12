@@ -40,8 +40,7 @@ function Chat({ file }) {
       });
       res = await res.json();
       console.log(res);
-      let text = res.answer.replaceAll("\n", "<br />");
-      res.answer = text;
+
       setResult(res);
       setSendLoading(false);
     } catch (e) {
@@ -68,7 +67,7 @@ function Chat({ file }) {
           value={prompt}
           onChange={handleChatChange}
           type="text"
-          placeholder={`Ask about ${file.name}`}
+          placeholder={`Type your question here`}
         />
         <div>
           <Tooltip title="Submit">
@@ -101,6 +100,7 @@ function Chat({ file }) {
             className="chat_result_text"
             StartIcon={<BsStars color={CustomColors.pureWhite} size={20} />}
             text={result?.answer}
+            sourceDocuments={result?.sourceDocuments}
           />
         </div>
       ) : (

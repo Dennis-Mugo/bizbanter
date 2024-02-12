@@ -11,7 +11,6 @@ const CustomColors = {
   grey800: "#424242",
   grey700: "#616161",
   grey600: "#757575",
-  grey600: "#757575",
   grey500: "#9E9E9E",
   grey400: "#BDBDBD",
   grey300: "#E0E0E0",
@@ -19,6 +18,7 @@ const CustomColors = {
   grey100: "#F5F5F5",
   grey50: "#FAFAFA",
   pureWhite: "#FFFFFF",
+  error: "rgb(255, 51,51)",
 };
 
 export default CustomColors;
