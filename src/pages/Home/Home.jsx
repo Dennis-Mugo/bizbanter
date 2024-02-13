@@ -10,6 +10,8 @@ import { ConstructionOutlined } from '@mui/icons-material';
 import Powerpoint from '../../components/Body/Powerpoint';
 import Text from '../../components/Body/Text';
 import WebUrl from '../../components/Body/WebUrl';
+import YTube from '../../components/Body/Ytube';
+import SnackBar from '../../components/SnackBar/SnackBar';
 
 function Home(props) {
     const { selectedModule, screenWidth } = useContext(BizBanterContext);
@@ -28,6 +30,7 @@ function Home(props) {
                     <h3>{selectedModule.title}</h3>
                 </div>
                 <Body />
+                <SnackBar />
             </div>
         </div>
     );
@@ -45,6 +48,8 @@ const Body = () => {
         return <Text />
     } else if (selectedModule.key === "web") {
         return <WebUrl />
+    } else if (selectedModule.key === 'yt') {
+        return <YTube />
     }
 }
 

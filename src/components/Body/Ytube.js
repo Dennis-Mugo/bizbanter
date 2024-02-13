@@ -12,7 +12,7 @@ import { TbWorld } from "react-icons/tb";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { IoCheckmark } from "react-icons/io5";
-
+import YouTubeIcon from "@mui/icons-material/YouTube";
 import CustomColors from "../../context/colors";
 import uuid4 from "uuid4";
 import { baseUrl, buttonStyle } from "../../context/constants";
@@ -20,7 +20,7 @@ import { BizBanterContext } from "../../context/context";
 import Chat from "../Chat/Chat";
 import { LoadingButton } from "@mui/lab";
 
-function WebUrl(props) {
+function YTube(props) {
   const { setCurrentChain, setSnackbarState } = useContext(BizBanterContext);
   const [urlCount, setUrlCount] = useState(1);
   const [uploadLoading, setUploadLoading] = useState(false);
@@ -53,6 +53,11 @@ function WebUrl(props) {
     let passValidated = true;
     let lst = Array(urlCount).fill("");
     for (let i = 0; i < urlCount; i++) {
+      if (!urls[i].length) {
+        passValidated = false;
+        lst[i] = "This field is empty!";
+        continue;
+      }
       try {
         let givenUrl = new URL(urls[i]);
       } catch (e) {
@@ -75,7 +80,7 @@ function WebUrl(props) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          file_type: "web",
+          file_type: "yt",
           file_url: urls,
         }),
       });
@@ -86,20 +91,20 @@ function WebUrl(props) {
       setStatus("chain");
     } catch (e) {
       console.log(e);
-      setUploadLoading(false);
       setSnackbarState({
         open: true,
         severity: "error",
         message: "An error occured!",
       });
+      setUploadLoading(false);
     }
   };
 
   return (
     <div className="body_container link_container">
       <p className="body_header_text">
-        Upload website URLs and Bizbanter will help you answer questions from
-        them.
+        Upload youtube video links and Bizbanter will help you answer questions
+        from them.
       </p>
       <div className="url_input_container">
         <div
@@ -110,10 +115,9 @@ function WebUrl(props) {
           }
           style={{ margin: "30px auto 0", width: "100%" }}
         >
-          <TbWorld
-            color={CustomColors.pureWhite}
+          <YouTubeIcon
             size={23}
-            style={{ marginRight: "10px" }}
+            sx={{ marginRight: "10px", color: CustomColors.pureWhite }}
           />
           <input
             value={urls[0]}
@@ -121,7 +125,7 @@ function WebUrl(props) {
               handleUrlChange(e.target.value, 0);
             }}
             type="text"
-            placeholder={`https...`}
+            placeholder={`https://youtu.be/FQd5bo9nIZs`}
           />
           {/* <div>
           <Tooltip title="Submit">
@@ -162,10 +166,9 @@ function WebUrl(props) {
               }
               style={{ margin: "30px auto 0", width: "100%" }}
             >
-              <TbWorld
-                color={CustomColors.pureWhite}
+              <YouTubeIcon
                 size={23}
-                style={{ marginRight: "10px" }}
+                style={{ marginRight: "10px", color: CustomColors.pureWhite }}
               />
               <input
                 value={urls[index + 1]}
@@ -174,7 +177,7 @@ function WebUrl(props) {
                   handleUrlChange(value, index + 1);
                 }}
                 type="text"
-                placeholder={`Enter URL...`}
+                placeholder={`https://youtu.be/FQd5bo9nIZs`}
               />
               <div>
                 <Tooltip title="Remove" placement="left">
@@ -227,7 +230,7 @@ function WebUrl(props) {
             //   borderRadius: "75px",
           }}
         >
-          Add URL
+          Add link
         </Button>
         <Button
           onClick={handleUpload}
@@ -258,4 +261,4 @@ function WebUrl(props) {
   );
 }
 
-export default WebUrl;
+export default YTube;

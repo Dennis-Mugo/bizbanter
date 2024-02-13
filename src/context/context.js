@@ -10,6 +10,11 @@ export const BizBanterProvider = ({ children }) => {
   const [selectedModule, setSelectedModule] = useState(modules[0]);
   const [screenWidth, setScreenWidth] = useState(null);
   const [currentChain, setCurrentChain] = useState("");
+  const [snackbarState, setSnackbarState] = useState({
+    open: false,
+    message: "",
+    severity: "",
+  });
 
   let hasWindow = typeof window !== "undefined";
   useEffect(() => {
@@ -60,6 +65,8 @@ export const BizBanterProvider = ({ children }) => {
         uploadFile,
         currentChain,
         setCurrentChain,
+        snackbarState,
+        setSnackbarState,
       }}
     >
       {children}

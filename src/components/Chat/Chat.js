@@ -7,9 +7,11 @@ import CustomColors from "../../context/colors";
 import { baseUrl } from "../../context/constants";
 import { BsStars } from "react-icons/bs";
 import TypeWriter from "../TypeWriter/TypeWriter";
+import SnackBar from "../SnackBar/SnackBar";
 
 function Chat({ file }) {
-  const { selectedModule, currentChain } = useContext(BizBanterContext);
+  const { selectedModule, currentChain, setSnackbarState } =
+    useContext(BizBanterContext);
   const [sendLoading, setSendLoading] = useState(false);
   const [prompt, setPrompt] = useState("");
   const [result, setResult] = useState();
@@ -45,6 +47,11 @@ function Chat({ file }) {
       setSendLoading(false);
     } catch (e) {
       console.log(e);
+      setSnackbarState({
+        message: "An error occured!",
+        open: true,
+        severity: "error",
+      });
       setSendLoading(false);
     }
   };
@@ -100,7 +107,11 @@ function Chat({ file }) {
             className="chat_result_text"
             StartIcon={<BsStars color={CustomColors.pureWhite} size={20} />}
             text={result?.answer}
-            sourceDocuments={result?.sourceDocuments}
+            sourceDocuments={
+              selectedModule.key === "yt"
+                ? result?.metadata
+                : result?.sourceDocuments
+            }
           />
         </div>
       ) : (

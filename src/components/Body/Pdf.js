@@ -17,8 +17,13 @@ import { BizBanterContext } from "../../context/context";
 import Chat from "../Chat/Chat";
 
 function Pdf(props) {
-  const { screenWidth, uploadFile, selectedModule, setCurrentChain } =
-    useContext(BizBanterContext);
+  const {
+    screenWidth,
+    uploadFile,
+    selectedModule,
+    setCurrentChain,
+    setSnackbarState,
+  } = useContext(BizBanterContext);
   const [status, setStatus] = useState("train");
   const [localUrl, setLocalUrl] = useState("");
   const [localFile, setLocalFile] = useState();
@@ -68,6 +73,11 @@ function Pdf(props) {
       console.log(e);
       setUploading(false);
       setUploadStatus("Upload");
+      setSnackbarState({
+        open: true,
+        message: "An error occured!",
+        severity: "error",
+      });
     }
   };
 
@@ -75,7 +85,18 @@ function Pdf(props) {
     if (uploadStatus !== "Upload" || uploading) return;
     setUploading(true);
     setUploadStatus("uploading_file");
-    await uploadFile(localFile, trainModel, "bizbanter", setUploadProgress);
+    try {
+      await uploadFile(localFile, trainModel, "bizbanter", setUploadProgress);
+    } catch (e) {
+      console.log(e);
+      setUploading(false);
+      setUploadStatus("Upload");
+      setSnackbarState({
+        open: true,
+        message: "An error occured!",
+        severity: "error",
+      });
+    }
   };
 
   return (
